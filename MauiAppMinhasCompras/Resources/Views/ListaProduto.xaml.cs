@@ -6,4 +6,20 @@ public partial class ListaProduto : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void ToolbarItem_Clicked(object sender, EventArgs e)
+    {
+
+		try
+		{
+
+			Navigation.PushAsync(new Resources.Views.NovoProduto());
+
+        }
+		catch(Exception ex)
+		{
+			DisplayAlert("ops", ex.Message, "ok");
+		}
+
+    }
 }
