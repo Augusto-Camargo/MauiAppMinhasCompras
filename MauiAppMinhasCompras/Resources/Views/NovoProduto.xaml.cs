@@ -9,24 +9,26 @@ public partial class NovoProduto : ContentPage
 		InitializeComponent();
 	}
 
-    private async Task ToolbarItem_Clicked(object sender, EventArgs e)
+    private async void ToolbarItem_Clicked(object sender, EventArgs e)
     {
-		try
-		{
-			Produto p = new Produto
-			{
-				Descricao = txt_descricao.Text,
-				Quantidade = Convert.ToDouble(txt_quantidade.Text),
-				Preco = Convert.ToDouble(txt_preco.Text)
-			};
 
-			await App.Db.Insert(p);
-			await DisplayAlert("Sucesso", "Produto cadastrado com sucesso!", "OK");
+        try
+        {
+            Produto p = new Produto
+            {
+                Descricao = txt_descricao.Text,
+                Quantidade = Convert.ToDouble(txt_quantidade.Text),
+                Preco = Convert.ToDouble(txt_preco.Text)
+            };
+
+            await App.Db.Insert(p);
+            await DisplayAlert("Sucesso", "Produto cadastrado com sucesso!", "OK");
         }
-		catch (Exception ex)
-		{
-			await DisplayAlert("ops", ex.Message, "ok");
+        catch (Exception ex)
+        {
+            await DisplayAlert("ops", ex.Message, "ok");
 
         }
+
     }
 }

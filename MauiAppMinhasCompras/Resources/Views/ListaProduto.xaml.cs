@@ -13,13 +13,28 @@ public partial class ListaProduto : ContentPage
 		try
 		{
 
-			Navigation.PushAsync(new Resources.Views.NovoProduto());
+			Navigation.PushAsync(new Views.NovoProduto());
 
         }
 		catch(Exception ex)
 		{
 			DisplayAlert("ops", ex.Message, "ok");
 		}
+
+    }
+
+    private void ToolbarItem_Clicked_1(object sender, EventArgs e)
+    {
+        try
+        {
+
+           
+
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("ops", ex.Message, "ok");
+        }
 
     }
 }
