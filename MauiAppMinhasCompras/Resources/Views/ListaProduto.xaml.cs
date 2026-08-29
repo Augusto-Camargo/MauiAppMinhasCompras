@@ -12,7 +12,7 @@ public partial class ListaProduto : ContentPage
     {
         InitializeComponent();
 
-        lst.ItemsSource = Lista;
+        lst_produtos.ItemsSource = Lista;
     }
 
     protected async override void OnAppearing() {
@@ -39,7 +39,7 @@ public partial class ListaProduto : ContentPage
 
     }
 
-    private async void txt_search_TextChagend(BindableObject sender, TextChangedEventArgs e)
+    private async void txt_search_TextChanged(Object sender, TextChangedEventArgs e)
     {
         string q = e.NewTextValue;
 
