@@ -17,10 +17,17 @@ public partial class ListaProduto : ContentPage
 
     protected async override void OnAppearing() {
 
+        try{
+
         List<Produto> tmp = await App.Db.GetAll();
 
         tmp.ForEach(i => Lista.Add(i));
 
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("ops", ex.Message, "ok");
+        }
     }
 
     private void ToolbarItem_Clicked(object sender, EventArgs e)
@@ -59,10 +66,48 @@ public partial class ListaProduto : ContentPage
         DisplayAlert("Total dos Produtos", msg, "OK");
     }
 
-    private void MenuItem_Clicked(object sender, EventArgs e)
+    private async Task MenuItem_Clicked(object sender, EventArgs e)
     {
 
+        try
+        {
 
+            MenuItem selecionado = sender as MenuItem;
 
+            Produto p = selecionado.BindingContext as Produto;
+
+            bool confirm = await DisplayAlert(
+                "Tem Certeza?", $"Remover {p.Descricao}", "sim", "não");
+
+            if(confirm)
+            {
+                await App.Db.Delete(p.Id);
+                Lista.Remove(p);
+            }
+
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("ops", ex.Message, "ok");
+        }
+
+    }
+
+    private void lst_produtos_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        try
+        {
+
+            Produto p = e.SelectedItem as Produto;
+            Navigation.PushAsync(new Views.EditarProduto
+            {
+                BindingContext = p,
+            });
+
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("ops", ex.Message, "ok");
+        }
     }
 }
